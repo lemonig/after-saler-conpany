@@ -1,0 +1,28 @@
+@import url(./blanket.css);
+@import url(./styles/theme.less);
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  color: black;
+  overflow: hidden;
+}
+// antd 样式覆盖
+:root:root {
+  --adm-color-primary: #1866bb;
+}
+.map-wrap .adm-list-item-content-main {
+  padding: 4px 0 !important;
+}
+.adm-tag {
+  padding: 6px 10px !important;
+}
+
+.adm-tabs {
+  height: calc(100% - 45px);
+}
+.adm-tabs-content {
+  height: calc(100% - 50px);
+  overflow: auto;
+  box-sizing: border-box;
+}

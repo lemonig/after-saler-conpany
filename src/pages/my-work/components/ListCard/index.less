@@ -1,0 +1,41 @@
+.list-card {
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .adm-tag:first-child {
+    }
+    .adm-tag:last-child {
+    }
+  }
+  .content {
+    p {
+      padding: 6px 0;
+      font-size: 14px;
+    }
+    > p:first-child {
+      color: #919191;
+    }
+    > p:last-child {
+      color: #101010;
+    }
+    .desc {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .footer {
+    padding-top: 11px;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .footer span:last-child {
+    margin: 0 8px;
+  }
+
+  .customBody {
+    color: var(--adm-color-success);
+  }
+}
