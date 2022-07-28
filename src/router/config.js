@@ -11,6 +11,8 @@ const OrderOver = React.lazy(() => import("../pages/order-over")); //进度详�
 const RecorPprogress = React.lazy(() => import("../pages/record-progress")); //完工记录
 const RecorScene = React.lazy(() => import("../pages/record-scene")); //现场记录
 const RecorOver = React.lazy(() => import("../pages/record-over")); //现场记录
+const Error = React.lazy(() => import("../pages/error")); //错误
+const Error1 = React.lazy(() => import("../pages/error1")); //错误
 
 const config = [
   {
@@ -24,6 +26,22 @@ const config = [
     element: (
       <React.Suspense fallback={<>...</>}>
         <LoginToHome />,
+      </React.Suspense>
+    ),
+  },
+  {
+    path: "/error",
+    element: (
+      <React.Suspense fallback={<>...</>}>
+        <Error />,
+      </React.Suspense>
+    ),
+  },
+  {
+    path: "/errorOther",
+    element: (
+      <React.Suspense fallback={<>...</>}>
+        <Error1 />,
       </React.Suspense>
     ),
   },

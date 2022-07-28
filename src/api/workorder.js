@@ -61,15 +61,15 @@ export const workOrderDetail = (params) => {
 };
 //仪器厂家
 export const listManufactor = (params) => {
-  return _get(`/api/SiteSituation/listManufactor`, params);
+  return _post(`/api/SiteSituation/listManufactor`, params);
 };
 //仪器类别
 export const listDeviceType = (params) => {
-  return _get(`/api/SiteSituation/listDeviceType`, params);
+  return _post(`/api/SiteSituation/listDeviceType`, params);
 };
 //仪器厂家
 export const listProject = (params) => {
-  return _get(`api/SiteSituation/listProject`, params);
+  return _post(`api/SiteSituation/listProject`, params);
 };
 //质保列表
 export const listWarranty = (params) => {

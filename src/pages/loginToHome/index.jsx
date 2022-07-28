@@ -16,8 +16,12 @@ const LoginToHome = () => {
     if (code) {
       getTicket({ code });
     } else {
-      getTicket({ workCode: 1004 });
+      navigate("/error");
+      // getTicket({ workCode: 1004 });
     }
+    // else {
+    //   getTicket({ workCode: 1004 });
+    // }
   }, []);
 
   const getParam = (name, defaultValue) => {
@@ -37,6 +41,8 @@ const LoginToHome = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data));
       navigate("/", { replace: true });
+    } else {
+      navigate("/errorOther");
     }
   };
 
