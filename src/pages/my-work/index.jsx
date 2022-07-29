@@ -6,23 +6,20 @@ import Evaluted from "./components/Evaluted";
 import Process from "./components/Process";
 import TitleBar from "@Components/TitleBar";
 import "./index.less";
+import { connect } from "react-redux";
+import { tabAction } from "@Store/actions/tab-action";
+import store from "@Store";
 
-function MyWork() {
-  useEffect(() => {
-    let user = JSON.parse(localStorage.getItem("user"));
-    setName(user.name);
-  }, []);
-  // const [key, setKey] = useState();
-  const [name, setName] = useState("");
-  // const handleTabChange = (key) => {
-  //   setKey(key);
-  // };
+function MyWork({ tab }) {
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  const handleTabChange = (key) => {
+    store.dispatch(tabAction.selectTab(key));
+  };
   return (
     <div className="my-work">
-      {/* <TitleBar  title="刘杰-我的派单" />
-       */}
-      <NavBar back={null}>{name}-我的派单</NavBar>
-      <Tabs>
+      <NavBar back={null}>{user.name}-我的派单</NavBar>
+      <Tabs onChange={handleTabChange} activeKey={tab.value}>
         <Tabs.Tab title="待接单" key="1" destroyOnClose>
           <Serve />
         </Tabs.Tab>
@@ -37,4 +34,5 @@ function MyWork() {
   );
 }
 
-export default MyWork;
+const mapStateToProps = (state) => state;
+export default connect(mapStateToProps)(MyWork);

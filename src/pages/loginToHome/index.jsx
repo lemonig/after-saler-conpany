@@ -6,6 +6,9 @@ import "./index.less";
 
 const LoginToHome = () => {
   let navigate = useNavigate();
+  let id = new URLSearchParams(useLocation().search).get("code");
+  console.log(id);
+  console.log(new URLSearchParams(useLocation().search));
   useEffect(() => {
     // let href = window.location.href; // 完整的url路径
     // let search = location.search; // 获取从？开始的部分
@@ -16,8 +19,8 @@ const LoginToHome = () => {
     if (code) {
       getTicket({ code });
     } else {
-      navigate("/error");
-      // getTicket({ workCode: 1004 });
+      // navigate("/error");
+      getTicket({ workCode: 1004 });
     }
     // else {
     //   getTicket({ workCode: 1004 });

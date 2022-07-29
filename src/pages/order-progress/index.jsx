@@ -140,7 +140,7 @@ function ProgressOn() {
   const handleRecorScene = (first) => {
     navigate({
       pathname: "/recorScene",
-      search: `?id=${id}`,
+      search: `?id=${id}&sceneId=${pageData?.siteSituations[0]?.id}`,
     });
   };
 
@@ -234,8 +234,30 @@ function ProgressOn() {
         <AddOutline /> 记录现场情况
       </div>
       <Divider />
-      {pageData.siteSituations &&
-        pageData?.siteSituations.map((item) => (
+      {pageData?.siteSituations?.length ? (
+        <Card className="progress-card card-margin">
+          <List className="my-list">
+            <List.Item prefix={"仪器信息"}>
+              {pageData?.siteSituations[0]?.device_name}
+            </List.Item>
+            <List.Item prefix={"质保情况"}>
+              {pageData?.siteSituations[0]?.warranty_name}
+            </List.Item>
+            <List.Item prefix={"远程连接"}>
+              {pageData?.siteSituations[0]?.remote_link}
+            </List.Item>
+            <List.Item prefix={"项目信息"}>
+              {pageData?.siteSituations[0]?.project_name}
+            </List.Item>
+            <List.Item prefix={"站点信息"}>
+              {pageData?.siteSituations[0]?.station}
+            </List.Item>
+          </List>
+        </Card>
+      ) : null}
+
+      {/* {pageData.siteSituations &&
+        pageData?.siteSituations.map((item,idx) => (
           <Card className="progress-card card-margin" key={item.id}>
             <List className="my-list">
               <List.Item prefix={"仪器信息"}>{item?.device_name}</List.Item>
@@ -245,7 +267,7 @@ function ProgressOn() {
               <List.Item prefix={"站点信息"}>{item?.station}</List.Item>
             </List>
           </Card>
-        ))}
+        ))} */}
 
       <ImageViewer
         image={pageData.wechat_url}

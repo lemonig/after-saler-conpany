@@ -83,3 +83,7 @@ export const listCompany = (params) => {
 export const addSiteSituation = (params) => {
   return _post(`api/SiteSituation/add`, params);
 };
+//现场情况
+export const getSiteSituation = (params) => {
+  return _post(`api/SiteSituation/queryById`, params);
+};

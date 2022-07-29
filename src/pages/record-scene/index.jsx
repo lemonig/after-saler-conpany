@@ -9,6 +9,7 @@ import {
   listWarranty,
   listCompany,
   addSiteSituation,
+  getSiteSituation,
 } from "../../api/workorder";
 
 import { useNavigate, useLocation } from "react-router-dom";
@@ -20,12 +21,14 @@ import People from "./components/People";
 const RecordScene = () => {
   let navigate = useNavigate();
   let id = new URLSearchParams(useLocation().search).get("id");
+  let sceneId = new URLSearchParams(useLocation().search).get("sceneId");
   const [form] = Form.useForm();
-  const [manufactorList, setManufactorList] = useState([]);
-  const [deviceTypeList, setDeviceTypeList] = useState([]);
-  const [projectList, setProjectList] = useState([]);
-  const [warrantyList, setWarrantyList] = useState([]);
-  const [companyList, setconpanyList] = useState([]);
+  const [pagedata, setPagedata] = useState({});
+
+  const [warrantyList, setWarrantyList] = useState([
+    { label: "质保1:", value: 1 },
+    { label: "质保2", value: 2 },
+  ]);
   const [showSearchPage, setShowSearchPage] = useState({
     main: true,
     device: false,
@@ -47,46 +50,32 @@ const RecordScene = () => {
     getListWarranty();
   }, []);
 
-  const getCompanyList = async () => {
-    let { data, success } = await listCompany({ id });
+  const getPageData = async () => {
+    let { data, success } = await getSiteSituation({ id: sceneId });
     if (success) {
-      const newData = changeToPickerData(data);
-      console.log(newData);
-      setconpanyList(newData);
+      setPagedata(data);
+      setSearchCall({
+        device: data.device_name,
+        manufactor: data.manufactor_name,
+        project: data.project_name,
+        people: data.company_name,
+      });
+      // form.setFieldsValue(data);
       form.setFieldsValue({
-        // company_id: 1,
+        ...data,
+        warranty_id: [data.warranty_id],
       });
     }
   };
-  // 厂家
-  const getListManufactor = async () => {
-    let { data, success } = await listManufactor();
-    if (success) {
-      // const newData = changeToPickerData(data);
-      setManufactorList(data);
-    }
-  };
-  // 分类
-  const getListDeviceType = async () => {
-    let { data, success } = await listDeviceType();
-    if (success) {
-      // const newData = changeToPickerData(data);
-      setDeviceTypeList(data);
-    }
-  };
-  // 项目
-  const getListProject = async () => {
-    let { data, success } = await listProject();
-    if (success) {
-      // const newData = changeToPickerData(data);
-      setProjectList(data);
-    }
-  };
+
   const getListWarranty = async () => {
     let { data, success } = await listWarranty();
     if (success) {
       const newData = changeToPickerData(data);
       setWarrantyList(newData);
+    }
+    if (sceneId) {
+      getPageData();
     }
   };
   // 处理数据
@@ -205,11 +194,6 @@ const RecordScene = () => {
             提交
           </Button>
         }
-        initialValues={
-          {
-            // device_type: "11",
-          }
-        }
       >
         <Form.Item
           label="现场人公司"
@@ -266,6 +250,9 @@ const RecordScene = () => {
             PickerRef.current?.open();
           }}
           trigger="onConfirm"
+          // initialValue={{
+          //   warranty_id: 2,
+          // }}
         >
           <Picker columns={[warrantyList]}>
             {([value]) => (value ? value.label : "请选择")}

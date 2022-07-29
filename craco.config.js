@@ -63,6 +63,8 @@ module.exports = {
     alias: {
       "@Components": pathResolve("src/components"),
       "@": pathResolve("src"),
+      "@Store": pathResolve("src/store"),
+      "@Util": pathResolve("src/util"),
     },
   },
   babel: {
