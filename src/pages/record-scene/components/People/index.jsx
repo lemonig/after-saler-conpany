@@ -89,7 +89,7 @@ function Device({ callback, closePage, id }) {
   return (
     <div className="search-list">
       <NavBar back="" backArrow={<CloseOutline />} onBack={back}>
-        选择现场人公司
+        选择所属公司
       </NavBar>
       <SearchBar
         placeholder="请输入内容"

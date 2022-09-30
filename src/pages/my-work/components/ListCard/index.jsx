@@ -39,7 +39,7 @@ function ListCard({ msg, refresh, gotoName }) {
         <p>
           <span>服务单号 {msg.service_code}</span>
 
-          <Tag color="#2db7f5">{orderStatus(msg.status)}</Tag>
+          <Tag color="#2db7f5">{msg.fault_type}</Tag>
         </p>
         <p>提交日期 {moment(msg.gmt_create).format("YYYY-MM-DD")}</p>
         <p className="desc">描述 {msg.describe}</p>

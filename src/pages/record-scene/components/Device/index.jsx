@@ -87,7 +87,7 @@ function Device({ callback, closePage }) {
   return (
     <div className="search-list">
       <NavBar back="" backArrow={<CloseOutline />} onBack={back}>
-        选择仪器分类
+        选择设备类别
       </NavBar>
       <SearchBar
         placeholder="请输入内容"

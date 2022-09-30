@@ -95,7 +95,7 @@ const RecordOver = () => {
       fault_type_id: values.fault_type_id[0],
       after_sale_type_id: values.after_sale_type_id[0],
       after_sale_mode_id: values.after_sale_mode_id[0],
-      finish_time: dayjs(values.finish_time).format("YYYY-MM-DD"),
+      finish_time: dayjs(values.finish_time).format("YYYY-MM-DD HH"),
     };
     let { success } = await addFinished(params);
     if (success) {
@@ -133,7 +133,13 @@ const RecordOver = () => {
           trigger="onConfirm"
         >
           <Picker columns={[faultTypeList]}>
-            {([value]) => (value ? value.label : "请选择")}
+            {([value]) =>
+              value ? (
+                value.label
+              ) : (
+                <span className="placer-hoder-text">请选择</span>
+              )
+            }
           </Picker>
         </Form.Item>
 
@@ -146,9 +152,13 @@ const RecordOver = () => {
           }}
           trigger="onConfirm"
         >
-          <DatePicker>
+          <DatePicker precision="hour">
             {(value) =>
-              value ? dayjs(value).format("YYYY-MM-DD") : "请选择日期"
+              value ? (
+                dayjs(value).format("YYYY-MM-DD HH")
+              ) : (
+                <span className="placer-hoder-text">请选择日期</span>
+              )
             }
           </DatePicker>
         </Form.Item>
@@ -161,7 +171,13 @@ const RecordOver = () => {
           trigger="onConfirm"
         >
           <Picker columns={[afterSaleTypeList]}>
-            {([value]) => (value ? value.label : "请选择")}
+            {([value]) =>
+              value ? (
+                value.label
+              ) : (
+                <span className="placer-hoder-text">请选择</span>
+              )
+            }
           </Picker>
         </Form.Item>
 
@@ -174,7 +190,13 @@ const RecordOver = () => {
           trigger="onConfirm"
         >
           <Picker columns={[afterSaleModeList]}>
-            {([value]) => (value ? value.label : "请选择")}
+            {([value]) =>
+              value ? (
+                value.label
+              ) : (
+                <span className="placer-hoder-text">请选择</span>
+              )
+            }
           </Picker>
         </Form.Item>
       </Form>

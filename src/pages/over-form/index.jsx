@@ -62,7 +62,7 @@ const OverForm = () => {
         }
       >
         <Form.Item
-          label="现场人公司"
+          label="所属公司"
           name="cityCode"
           onClick={(e, provincePickerRef) => {
             provincePickerRef.current?.open();
@@ -70,7 +70,13 @@ const OverForm = () => {
           trigger="onConfirm"
         >
           <Picker columns={[conpanyList]}>
-            {([value]) => (value ? value.label : "请选择")}
+            {([value]) =>
+              value ? (
+                value.label
+              ) : (
+                <span className="placer-hoder-text">请选择</span>
+              )
+            }
           </Picker>
         </Form.Item>
         <Form.Item label="仪器厂家">

@@ -37,10 +37,10 @@ const RecordScene = () => {
     people: false,
   }); //页面显示
   const [searchCall, setSearchCall] = useState({
-    device: "请选择",
-    manufactor: "请选择",
-    project: "请选择",
-    people: "请选择",
+    device: "",
+    manufactor: "",
+    project: "",
+    people: "",
   });
 
   useEffect(() => {
@@ -74,7 +74,8 @@ const RecordScene = () => {
       const newData = changeToPickerData(data);
       setWarrantyList(newData);
     }
-    if (sceneId) {
+    console.log(sceneId);
+    if (!!sceneId) {
       getPageData();
     }
   };
@@ -196,7 +197,7 @@ const RecordScene = () => {
         }
       >
         <Form.Item
-          label="现场人公司"
+          label="所属公司"
           name="company_id"
           onClick={() =>
             setShowSearchPage({
@@ -208,7 +209,13 @@ const RecordScene = () => {
             })
           }
         >
-          <p>{searchCall.people}</p>
+          <p>
+            {searchCall.people ? (
+              searchCall.people
+            ) : (
+              <span className="placer-hoder-text">请选择</span>
+            )}
+          </p>
         </Form.Item>
         <Form.Item
           label="仪器厂家"
@@ -223,10 +230,16 @@ const RecordScene = () => {
             })
           }
         >
-          <p>{searchCall.manufactor}</p>
+          <p>
+            {searchCall.manufactor ? (
+              searchCall.manufactor
+            ) : (
+              <span className="placer-hoder-text">请选择</span>
+            )}
+          </p>
         </Form.Item>
         <Form.Item
-          label="仪器分类"
+          label="设备类别"
           name="device_id"
           onClick={() =>
             setShowSearchPage({
@@ -238,7 +251,13 @@ const RecordScene = () => {
             })
           }
         >
-          <p>{searchCall.device}</p>
+          <p>
+            {searchCall.device ? (
+              searchCall.device
+            ) : (
+              <span className="placer-hoder-text">请选择</span>
+            )}
+          </p>
         </Form.Item>
         <Form.Item label="仪器型号" name="device_type">
           <Input placeholder="请输入" />
@@ -255,7 +274,13 @@ const RecordScene = () => {
           // }}
         >
           <Picker columns={[warrantyList]}>
-            {([value]) => (value ? value.label : "请选择")}
+            {([value]) =>
+              value ? (
+                value.label
+              ) : (
+                <span className="placer-hoder-text">请选择</span>
+              )
+            }
           </Picker>
         </Form.Item>
         <Form.Item
