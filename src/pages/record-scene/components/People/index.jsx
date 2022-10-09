@@ -34,13 +34,12 @@ function Device({ callback, closePage, id }) {
   const getPageData = async (val) => {
     let params = {
       name: val,
-      ...pageMsg,
       id,
     };
     let { data, success } = await listCompany(params);
     if (success) {
       setData(data);
-      setHasMore(data.length >= 10);
+      // setHasMore(data.length >= 10);
     }
   };
   const back = () => {
@@ -67,7 +66,7 @@ function Device({ callback, closePage, id }) {
     };
     const { data, additional_data } = await listCompany(params);
     setData((val) => [...val, ...data]);
-    setHasMore(data.length >= 10);
+    // setHasMore(data.length >= 10);
     setPagemsg(params);
   };
 

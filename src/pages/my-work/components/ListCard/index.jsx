@@ -35,7 +35,7 @@ function ListCard({ msg, refresh, gotoName }) {
         {/* <Tag color="default">{msg.fault_type}</Tag>
         <Tag color="#2db7f5">{orderStatus(msg.status)}</Tag> */}
       </div>
-      <div className="content">
+      <div className="content" onClick={() => gotoLookupProgress(msg.id)}>
         <p>
           <span>服务单号 {msg.service_code}</span>
 

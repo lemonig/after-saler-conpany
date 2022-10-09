@@ -48,6 +48,8 @@ function ProgressOn() {
   let navigate = useNavigate();
   let id = new URLSearchParams(useLocation().search).get("id");
   const [imgVisible, setImgVisible] = useState(false);
+  const [imgDetailVisible, setImgDetailVisible] = useState(false);
+  const [detailImgSrc, setDetailImgSrc] = useState("");
   const [pageData, setPageData] = useState({});
   const [peopleList, setPeopleList] = useState([]); //
   const [transmitPeople, setTransmitPeople] = useState();
@@ -150,7 +152,10 @@ function ProgressOn() {
       });
     }
   };
-
+  const showImgDetail = (src) => {
+    setDetailImgSrc(src);
+    setImgDetailVisible(true);
+  };
   const $historyScene = () => {
     return pageData?.handleProcessList.map((item) => {
       return (
@@ -170,6 +175,7 @@ function ProgressOn() {
                   height={64}
                   fit="cover"
                   style={{ borderRadius: 4 }}
+                  onClick={() => showImgDetail(item)}
                 />
               ))}
             </p>
@@ -213,6 +219,7 @@ function ProgressOn() {
                   height={64}
                   fit="cover"
                   style={{ borderRadius: 4 }}
+                  onClick={() => showImgDetail(item)}
                 />
               ))}
             </Space>
@@ -304,6 +311,13 @@ function ProgressOn() {
         }}
         value={transmitPeople}
       ></Picker>
+      <ImageViewer
+        image={detailImgSrc}
+        visible={imgDetailVisible}
+        onClose={() => {
+          setImgDetailVisible(false);
+        }}
+      />
     </div>
   );
 }

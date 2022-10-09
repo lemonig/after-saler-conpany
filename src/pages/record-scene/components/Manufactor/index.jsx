@@ -35,12 +35,11 @@ function Manufactor({ callback, closePage }) {
   const getPageData = async (val) => {
     let params = {
       name: val,
-      ...pageMsg,
     };
     let { data, success } = await listManufactor(params);
     if (success) {
       setData(data);
-      setHasMore(data.length >= 10);
+      // setHasMore(data.length >= 10);
     }
   };
   const back = () => {
@@ -66,7 +65,7 @@ function Manufactor({ callback, closePage }) {
     };
     const { data, additional_data } = await listManufactor(params);
     setData((val) => [...val, ...data]);
-    setHasMore(data.length >= 10);
+    // setHasMore(data.length >= 10);
     setPagemsg(params);
   };
 

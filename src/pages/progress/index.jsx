@@ -41,6 +41,8 @@ function Progress() {
   let navigate = useNavigate();
   let id = new URLSearchParams(useLocation().search).get("id");
   const [imgVisible, setImgVisible] = useState(false);
+  const [imgDetailVisible, setImgDetailVisible] = useState(false);
+  const [detailImgSrc, setDetailImgSrc] = useState("");
   const [pageData, setPageData] = useState({});
 
   useEffect(() => {
@@ -78,6 +80,10 @@ function Progress() {
         />
       );
     });
+  };
+  const showImgDetail = (src) => {
+    setDetailImgSrc(src);
+    setImgDetailVisible(true);
   };
   const previewImg = () => {
     if (!pageData.wechat_url) {
@@ -129,6 +135,7 @@ function Progress() {
                   height={64}
                   fit="cover"
                   style={{ borderRadius: 4 }}
+                  onClick={() => showImgDetail(item)}
                 />
               ))}
             </Space>
@@ -140,6 +147,13 @@ function Progress() {
         visible={imgVisible}
         onClose={() => {
           setImgVisible(false);
+        }}
+      />
+      <ImageViewer
+        image={detailImgSrc}
+        visible={imgDetailVisible}
+        onClose={() => {
+          setImgDetailVisible(false);
         }}
       />
     </div>

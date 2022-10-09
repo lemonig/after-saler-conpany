@@ -35,7 +35,12 @@ import Item from "antd-mobile/es/components/dropdown/item";
 import { orderStatus } from "../../utils/constant";
 import moment from "moment";
 import IconFont from "../../components/IconFont";
-import { demoSrc, mockUpload, mockUploadFail } from "../../utils/imgUpload";
+import {
+  demoSrc,
+  mockUpload,
+  mockUploadFail,
+  beforeUpload,
+} from "../../utils/imgUpload";
 import Map from "../map";
 
 function RecordProgress() {
@@ -51,7 +56,7 @@ function RecordProgress() {
     await form.validateFields();
     const values = form.getFieldsValue();
     values.work_order_id = id;
-    if(mapAddr){
+    if (mapAddr) {
       values.coordinate1 = mapAddr.lnglat.lng;
       values.coordinate2 = mapAddr.lnglat.lat;
     }
@@ -142,6 +147,8 @@ function RecordProgress() {
             value={fileList}
             onChange={setFileList}
             upload={mockUpload}
+            maxCount={3}
+            beforeUpload={beforeUpload}
           />
         </Form.Item>
       </Form>
