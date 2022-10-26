@@ -121,7 +121,8 @@ function Progress() {
             {pageData.workOrder?.service_code}
           </List.Item>
           <List.Item prefix={"描述"}>
-            <Ellipsis direction="end" content={pageData.workOrder?.describe} />
+            {/* <Ellipsis direction="end" content={pageData.workOrder?.describe} /> */}
+            {pageData.workOrder?.describe}
           </List.Item>
           <List.Item prefix={"产品型号"}>{pageData.workOrder?.model}</List.Item>
 

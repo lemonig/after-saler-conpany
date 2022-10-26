@@ -32,7 +32,7 @@ function Evaluted() {
     };
     const { data, additional_data } = await workOrderFinished(params);
     setPageData((val) => [...val, ...data]);
-    setHasMore(data.length > 10);
+    setHasMore(data.length === 10);
     setPagemsg(params);
   };
 

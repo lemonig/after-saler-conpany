@@ -167,17 +167,19 @@ function ProgressOn() {
             </p>
             <p className="descript">{item.describe}</p>
             <p className="photo">
-              {item?.photo?.map((item, index) => (
-                <Image
-                  key={index}
-                  src={item}
-                  width={64}
-                  height={64}
-                  fit="cover"
-                  style={{ borderRadius: 4 }}
-                  onClick={() => showImgDetail(item)}
-                />
-              ))}
+              <Space wrap>
+                {item?.photo?.map((item, index) => (
+                  <Image
+                    key={index}
+                    src={item}
+                    width={64}
+                    height={64}
+                    fit="cover"
+                    style={{ borderRadius: 4 }}
+                    onClick={() => showImgDetail(item)}
+                  />
+                ))}
+              </Space>
             </p>
             <p className="color-greay">{item.address}</p>
           </div>
@@ -251,7 +253,7 @@ function ProgressOn() {
       {pageData?.siteSituations?.length ? (
         <Card className="progress-card card-margin">
           <List className="my-list">
-            <List.Item prefix={"现场人员公司"}>
+            <List.Item prefix={"工单所属公司"}>
               {pageData?.siteSituations[0]?.company_name ?? "--"}
             </List.Item>
             <List.Item prefix={"仪器厂家"}>

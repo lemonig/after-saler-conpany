@@ -37,6 +37,7 @@ const RecordOver = () => {
   const [faultTypeList, setFaultTypeList] = useState([]);
   const [afterSaleTypeList, setAfterSaleTypeList] = useState([]);
   const [afterSaleModeList, setAfterSaleModeList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getFailType();
@@ -97,7 +98,9 @@ const RecordOver = () => {
       after_sale_mode_id: values.after_sale_mode_id[0],
       finish_time: dayjs(values.finish_time).format("YYYY-MM-DD HH"),
     };
+    setLoading(true);
     let { success } = await addFinished(params);
+    setLoading(false);
     if (success) {
       Toast.show({
         icon: "success",
@@ -119,7 +122,13 @@ const RecordOver = () => {
         mode="card"
         form={form}
         footer={
-          <Button block color="primary" onClick={onSubmit} size="large">
+          <Button
+            block
+            color="primary"
+            onClick={onSubmit}
+            size="large"
+            loading={loading}
+          >
             提交
           </Button>
         }
@@ -131,6 +140,7 @@ const RecordOver = () => {
             failePickerRef.current?.open();
           }}
           trigger="onConfirm"
+          rules={[{ required: true, message: "请选择" }]}
         >
           <Picker columns={[faultTypeList]}>
             {([value]) =>
@@ -151,6 +161,7 @@ const RecordOver = () => {
             datePickerRef.current?.open();
           }}
           trigger="onConfirm"
+          rules={[{ required: true, message: "请选择" }]}
         >
           <DatePicker precision="hour">
             {(value) =>
@@ -169,6 +180,7 @@ const RecordOver = () => {
             PickerRef1.current?.open();
           }}
           trigger="onConfirm"
+          rules={[{ required: true, message: "请选择" }]}
         >
           <Picker columns={[afterSaleTypeList]}>
             {([value]) =>
@@ -188,6 +200,7 @@ const RecordOver = () => {
             PickerRef2.current?.open();
           }}
           trigger="onConfirm"
+          rules={[{ required: true, message: "请选择" }]}
         >
           <Picker columns={[afterSaleModeList]}>
             {([value]) =>

@@ -162,7 +162,7 @@ function ProgressOn() {
         pageData?.siteSituations.map((item) => (
           <Card className="over-card card-margin" key={item.id}>
             <List className="my-list">
-              <List.Item prefix={"现场人员公司"}>
+              <List.Item prefix={"工单所属公司"}>
                 {item?.company_name}
               </List.Item>
               <List.Item prefix={"仪器厂家"}>{item?.manufactor_name}</List.Item>

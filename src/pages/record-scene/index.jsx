@@ -24,7 +24,7 @@ const RecordScene = () => {
   let sceneId = new URLSearchParams(useLocation().search).get("sceneId");
   const [form] = Form.useForm();
   const [pagedata, setPagedata] = useState({});
-
+  const [loading, setLoading] = useState(false);
   const [warrantyList, setWarrantyList] = useState([
     { label: "质保1:", value: 1 },
     { label: "质保2", value: 2 },
@@ -96,6 +96,7 @@ const RecordScene = () => {
 
   const onSubmit = async () => {
     await form.validateFields();
+    setLoading(true);
     const values = form.getFieldsValue();
     values.work_order_id = id;
     for (let item in values) {
@@ -105,6 +106,7 @@ const RecordScene = () => {
     }
 
     let { success } = await addSiteSituation(values);
+    setLoading(false);
     if (success) {
       Toast.show({
         icon: "success",
@@ -191,13 +193,19 @@ const RecordScene = () => {
         mode="card"
         form={form}
         footer={
-          <Button block color="primary" onClick={onSubmit} size="large">
+          <Button
+            block
+            color="primary"
+            onClick={onSubmit}
+            size="large"
+            loading={loading}
+          >
             提交
           </Button>
         }
       >
         <Form.Item
-          label="所属公司"
+          label="工单所属公司"
           name="company_id"
           onClick={() =>
             setShowSearchPage({

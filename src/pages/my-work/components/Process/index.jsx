@@ -19,9 +19,7 @@ function Serve() {
     let { data, additional_data } = await workOrderNotFinished(pageMsg);
 
     let total = additional_data.total;
-    if (total > 10) {
-      setHasMore(true);
-    }
+    setHasMore(total > 10);
     setPageData(data);
   };
   const loadMore = async () => {
@@ -31,7 +29,7 @@ function Serve() {
     };
     const { data, additional_data } = await workOrderNotFinished(params);
     setPageData((val) => [...val, ...data]);
-    setHasMore(data.length > 10);
+    setHasMore(data.length === 10);
     setPagemsg(params);
   };
 

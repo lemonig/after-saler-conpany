@@ -50,10 +50,12 @@ function RecordProgress() {
   const [fileList, setFileList] = useState([]);
   const [showMap, setShowMap] = useState(false);
   const [mapAddr, setMapAddr] = useState(null); //地图选择
+  const [loading, setLoading] = useState(false);
   const formRule = [{ required: true }];
 
   const onSubmit = async () => {
     await form.validateFields();
+    setLoading(true);
     const values = form.getFieldsValue();
     values.work_order_id = id;
     if (mapAddr) {
@@ -67,6 +69,7 @@ function RecordProgress() {
       });
     }
     let { success } = await addHandleProcess(values);
+    setLoading(false);
     if (success) {
       Toast.show({
         icon: "success",
@@ -117,7 +120,13 @@ function RecordProgress() {
         mode="card"
         form={form}
         footer={
-          <Button block color="primary" onClick={onSubmit} size="large">
+          <Button
+            block
+            color="primary"
+            onClick={onSubmit}
+            size="large"
+            loading={loading}
+          >
             提交
           </Button>
         }

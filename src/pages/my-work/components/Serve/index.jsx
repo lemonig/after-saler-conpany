@@ -15,11 +15,11 @@ function Serve() {
     getPageData();
   }, []);
   const getPageData = async () => {
-    let { data, additional_data } = await workOrderNotAccepted(pageMsg);
-    let total = additional_data.total;
-    if (total > 10) {
-      setHasMore(true);
-    }
+    let {
+      data,
+      additional_data: { total },
+    } = await workOrderNotAccepted(pageMsg);
+    setHasMore(total > 10);
     setPageData(data);
   };
 
@@ -30,7 +30,7 @@ function Serve() {
     };
     const { data, additional_data } = await workOrderNotAccepted(params);
     setPageData((val) => [...val, ...data]);
-    setHasMore(data.length > 10);
+    setHasMore(data.length === 10);
     setPagemsg(params);
   };
 
