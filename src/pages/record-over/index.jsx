@@ -16,6 +16,7 @@ import {
   ImageUploader,
   Picker,
   DatePicker,
+  TextArea,
 } from "antd-mobile";
 import "./index.less";
 import TitleBar from "@Components/TitleBar";
@@ -97,6 +98,7 @@ const RecordOver = () => {
       after_sale_type_id: values.after_sale_type_id[0],
       after_sale_mode_id: values.after_sale_mode_id[0],
       finish_time: dayjs(values.finish_time).format("YYYY-MM-DD HH"),
+      conclusion: values.conclusion,
     };
     setLoading(true);
     let { success } = await addFinished(params);
@@ -211,6 +213,9 @@ const RecordOver = () => {
               )
             }
           </Picker>
+        </Form.Item>
+        <Form.Item label="处理过程和结果" name="conclusion">
+          <TextArea placeholder="请输入" />
         </Form.Item>
       </Form>
     </div>

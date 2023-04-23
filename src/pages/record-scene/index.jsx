@@ -216,6 +216,7 @@ const RecordScene = () => {
               people: true,
             })
           }
+          rules={[{ required: true, message: "请选择" }]}
         >
           <p>
             {searchCall.people ? (
@@ -267,7 +268,10 @@ const RecordScene = () => {
             )}
           </p>
         </Form.Item>
-        <Form.Item label="仪器型号" name="device_type">
+        <Form.Item label="设备型号" name="device_type">
+          <Input placeholder="请输入" />
+        </Form.Item>
+        <Form.Item label="设备编号" name="device_code">
           <Input placeholder="请输入" />
         </Form.Item>
         <Form.Item
