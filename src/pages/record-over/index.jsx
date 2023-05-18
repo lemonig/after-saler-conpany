@@ -29,6 +29,13 @@ import {
 } from "../../api/workorder";
 import dayjs from "dayjs";
 
+const returnVistList = [
+  "使用正规购买配件",
+  "使用流出配件",
+  "使用第三方配件",
+  "其它",
+];
+
 const conpanyList = [];
 const RecordOver = () => {
   let navigate = useNavigate();
@@ -93,16 +100,19 @@ const RecordOver = () => {
     await form.validateFields();
     const values = form.getFieldsValue();
     let params = {
+      ...values,
       work_order_id: id,
       fault_type_id: values.fault_type_id[0],
       after_sale_type_id: values.after_sale_type_id[0],
       after_sale_mode_id: values.after_sale_mode_id[0],
+      trouble_key_components_check: values.trouble_key_components_check
+        ? values.trouble_key_components_check[0]
+        : undefined,
       finish_time: dayjs(values.finish_time).format("YYYY-MM-DD HH"),
       conclusion: values.conclusion,
     };
     setLoading(true);
-    let { success } = await addFinished(params);
-    setLoading(false);
+    let { success, message } = await addFinished(params);
     if (success) {
       Toast.show({
         icon: "success",
@@ -112,8 +122,9 @@ const RecordOver = () => {
     } else {
       Toast.show({
         icon: "fail",
-        content: "失败",
+        content: message,
       });
+      setLoading(false);
     }
   };
   return (
@@ -214,8 +225,43 @@ const RecordOver = () => {
             }
           </Picker>
         </Form.Item>
-        <Form.Item label="处理过程和结果" name="conclusion">
+        <Form.Item
+          label="处理过程和结果"
+          name="conclusion"
+          rules={[{ required: true, message: "请输入" }]}
+        >
           <TextArea placeholder="请输入" />
+        </Form.Item>
+        <Form.Item label="故障关键元器件" name="trouble_key_components">
+          <TextArea placeholder="请输入" maxLength={200} />
+        </Form.Item>
+        <Form.Item
+          label="回访结果"
+          name="trouble_key_components_check"
+          onClick={(e, PickerRef3) => {
+            PickerRef3.current?.open();
+          }}
+          trigger="onConfirm"
+        >
+          <Picker
+            columns={[
+              returnVistList.map((item) => ({ label: item, value: item })),
+            ]}
+          >
+            {([value]) =>
+              value ? (
+                value.label
+              ) : (
+                <span className="placer-hoder-text">请选择</span>
+              )
+            }
+          </Picker>
+        </Form.Item>
+        <Form.Item
+          label="处理过程和结果"
+          name="trouble_key_components_check_description"
+        >
+          <TextArea placeholder="回访备注" maxLength={200} />
         </Form.Item>
       </Form>
     </div>
